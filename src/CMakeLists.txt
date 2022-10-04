@@ -1,6 +1,11 @@
 ##################################################
 # Build a custom protoc plugin
 ign_add_executable(ign_msgs_gen Generator.cc generator_main.cc)
+
+# Enable building with symbols on Windows
+set_target_properties(protobuf::libprotoc PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
+set_target_properties(protobuf::libprotobuf PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
+
 target_link_libraries(ign_msgs_gen
   protobuf::libprotoc
   protobuf::libprotobuf)
